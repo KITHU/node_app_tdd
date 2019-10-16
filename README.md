@@ -19,12 +19,15 @@ customers can create an account
 customer can login 
 
 ## end points
-| endpoint                 |  Features                   |
-| -------------------------|-----------------------------|
-| POST /auth/signup        | create a new user           |
-| POST /auth/login         | enables a user to login     |
-| GET  /v1/products        | retrives all the products   |
-
+| endpoint                 |  Features                         |
+| -------------------------|-----------------------------------|
+| POST api/v1/auth/signup        | create a new user           |
+| POST api/v1/auth/login         | enables a user to login     |
+| GET api/v1/v1/products         | retrives all the products   |
+| GET api/v1/products/:id        | retrive a specific product  |
+| POST api/v1/products           | create a product            |
+| PATCH api/v1/products/:id      | update a products           |
+| DELETE api/v1/products/:id     | delete a product            |
 ## local setup and testing using postman
 1. Clone this [repo](https://github.com/KITHU/node_app_tdd.git)
 2. cd into the project `cd node_app_tdd`

@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../config')
+const User = require('./User')
 
 
 const Model = Sequelize.Model;
@@ -25,5 +26,5 @@ const Product = db.define('product',{
   db,
   modelName: 'product'
 });
-
+User.hasMany(Product)
 module.exports = Product;
