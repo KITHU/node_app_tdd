@@ -18,7 +18,6 @@ router.get('/',(req, res, next) => {
       data.map(row=>{
         result.push(row.dataValues)
       })
-      console.log(result)
       res.status(200).json({
       products: result
       });
@@ -163,7 +162,9 @@ router.delete('/:productId', authorization,(req, res, next) => {
     }
   })
   .then(err=>{
-    console.log(err)
+    res.status(400).json({
+      error:err
+    })
   })
 });
 

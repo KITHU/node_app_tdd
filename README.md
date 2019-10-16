@@ -1,5 +1,9 @@
 # EXAMPLE OF A SHOPPING CART
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
+
 ## Description
 This is a simple implementation of a sample Shopping cart using node/expess to power the backend and postgres as the database.
 
@@ -33,6 +37,7 @@ customer can login
 2. cd into the project `cd node_app_tdd`
 3. install all the dependances `npm install`
 4. run the project `npm start`
+5. run test `npm test --coverage`
 5. Go to postman and interact with the app
 
 
