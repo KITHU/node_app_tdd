@@ -1,0 +1,229 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "shopping-cart",
+      "description": "node express crud application ",
+      "version": "1.0"
+    },
+    "produces": ["application/json"],
+    "host": "localhost:3000",
+    "basePath": "/api/v1",
+    "paths": {
+      "/auth/signup": {
+        "post": {
+          "summary":"create new user",
+          "tags": ["/auth"],
+          "description": "Register a new user",
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "new user details",
+              "required": true,
+               "schema": {
+                  "$ref": "#/definitions/usercreation"
+               }
+            }
+          ],
+          "responses": {
+            "200":{"description":"ok"},
+            "201":{"description":"created"},
+            "400":{"description":"bad request"}
+          }
+        }
+      },
+      "/auth/login": {
+        "post": {
+          "summary":"login for registered users",
+          "tags": ["/auth"],
+          "description": "",
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "user login",
+              "required": true,
+               "schema": {
+                  "$ref": "#/definitions/userlogin"
+               }
+            }
+          ],
+          "responses": {
+            "200":{"description":"ok"},
+            "201":{"description":"created"},
+            "400":{"description":"bad request"}
+          }
+        }
+      },
+      "/products": {
+        "post": {
+          "summary":"create new product",
+          "security":[
+            {"Bearer":[]}
+          ],
+          "tags": ["/products"],
+          "description": "",
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "create a new product",
+              "required": true,
+               "schema": {
+                  "$ref": "#/definitions/product"
+               }
+            }
+          ],
+          "responses": {
+            "201":{"description":"created"},
+            "400":{"description":"bad request"},
+            "401":{"description":"unauthorized"}
+          }
+        },
+        "get": {
+          "summary":"get all products",
+          "tags": ["/products"],
+          "description": "",
+          "parameters": [],
+          "responses": {
+            "200":{"description":"ok"},
+            "400":{"description":"bad request"}
+          }
+        }
+      },
+      "/products/{id}": {
+        "get": {
+          "summary":"get a single product",
+          "tags": ["/products"],
+          "description": "",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "description": "Id of product",
+              "required": true,
+               "schema": {
+                  "type":"integer"
+               }
+            }
+          ],
+          "responses": {
+            "200":{"description":"ok"},
+            "400":{"description":"bad request"}
+          }
+        },
+        "delete": {
+          "summary":"delete a product",
+          "security":[
+            {"Bearer":[]}
+          ],
+          "tags": ["/products"],
+          "description": "",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "description": "Id of product",
+              "required": true,
+               "schema": {
+                  "type":"integer"
+               }
+            }
+          ],
+          "responses": {
+            "200":{"description":"ok"},
+            "400":{"description":"bad request"},
+            "401":{"description":"unauthorized"}
+          }
+        },
+        "patch": {
+          "summary":"update a product",
+          "security":[
+            {"Bearer":[]}
+          ],
+          "tags": ["/products"],
+          "description": "",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "description": "Id of product",
+              "required": true,
+               "schema": {
+                  "type":"integer"
+               }
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "create a new product",
+              "required": false,
+               "schema": {
+                  "$ref": "#/definitions/product"
+               }
+            }
+          ],
+          "responses": {
+            "200":{"description":"ok"},
+            "400":{"description":"bad request"},
+            "401":{"description":"unauthorized"}
+          }
+        }
+
+      }
+    },
+  "definitions":{
+    "usercreation":{
+      "type":"object",
+      "properties":{
+        "firstName":{
+          "type":"string"
+        },
+        "lastName":{
+          "type":"string"
+        },
+        "email":{
+          "type":"string"
+        },
+        "password":{
+          "type":"string"
+        }
+      } 
+    },
+    "userlogin":{
+      "type":"object",
+      "properties":{
+        "email":{
+          "type":"string"
+        },
+        "password":{
+          "type":"string"
+        }
+      }
+    },
+    "product":{
+      "type":"object",
+      "properties":{
+        "name":{
+          "type":"string"
+        },
+        "description":{
+          "type":"string"
+        },
+        "price":{
+          "type":"number"
+        },
+        "stock":{
+          "type":"number"
+        }
+      }
+    }
+  },
+  "securityDefinitions":{
+    "Bearer":{
+        "type":"apiKey",
+        "in": "header",
+        "name": "Authorization"
+    }
+  }
+ }
