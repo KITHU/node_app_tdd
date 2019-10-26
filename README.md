@@ -23,11 +23,11 @@ customers can create an account
 customer can login 
 
 ## end points
-| endpoint                 |  Features                         |
-| -------------------------|-----------------------------------|
+| endpoint                       |  Features                         |
+| -------------------------------|-----------------------------------|
 | POST api/v1/auth/signup        | create a new user           |
 | POST api/v1/auth/login         | enables a user to login     |
-| GET api/v1/v1/products         | retrives all the products   |
+| GET api/v1/products            | retrives all the products   |
 | GET api/v1/products/:id        | retrive a specific product  |
 | POST api/v1/products           | create a product            |
 | PATCH api/v1/products/:id      | update a products           |
