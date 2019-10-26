@@ -1,10 +1,9 @@
 const Sequelize = require('sequelize')
+const dotenv = require('dotenv') 
+dotenv.config();
 
-let db_production = 'postgresql://pharel:pharel@localhost:5432/product'
+let dburl = process.env.DB_DEV || process.env.DB_TEST
 
-let db_test = 'postgresql://pharel:pharel@localhost:5432/db_test'
-
-
-const db = new Sequelize(db_test);
+const db = new Sequelize(dburl);
 db.sync();
 module.exports = db
