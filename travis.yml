@@ -6,5 +6,9 @@ node_js:
   - node
 install:
   - npm ci
+services:
+  - postgresql
+before script:
+  
 script:
   - npm run test:coveralls
