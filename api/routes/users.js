@@ -18,19 +18,19 @@ router.post('/login',(req, res, next) => {
   
   formFields(fields,request,res)
   if (validator.isEmail(request.email) === false){
-    res.status(400).json({
+    return res.status(400).json({
       error: 'email should be a valid email'
     })
   }
   User.findOne({where:{email:request.email}})
     .then(user=>{
       if (user.length < 1){
-        res.status(404).json({
+        return res.status(404).json({
         error: "invalid login email"
         })
       }
       if (bcrypt.compareSync(request.password, user.password) === false){
-        res.status(404).json({
+        return res.status(404).json({
           error: "invalid login password"
         });
       }
@@ -41,7 +41,7 @@ router.post('/login',(req, res, next) => {
         "lastNmae":user.lastName
       }
       
-      res.status(200).json({
+      return res.status(200).json({
        message:"you are loged in",
        token:jwt(data)
       })
@@ -58,25 +58,25 @@ router.post('/signup',(req, res, next) => {
   formFields(fields,request,res)
 
   if (validator.isEmail(request.email) === false){
-    res.status(400).json({
+    return res.status(400).json({
       error: 'email should be a valid email'
     })
   }
   if (validator.isAlphanumeric(request.password) === false || 
      validator.isLength(request.password, 6,12) === false){
-    res.status(400).json({
+    return res.status(400).json({
       error: 'password should be Alphanumeric with a min of 6 and max 12 characters '
     })
   }
   if (validator.isAlpha(request.firstName) === false || 
      validator.isLength(request.firstName, 3,20) === false){
-    res.status(400).json({
+    return res.status(400).json({
       error: 'firstName should be atleast 3 characters long '
     })
   }
   if (validator.isAlpha(request.lastName) === false || 
      validator.isLength(request.lastName, 3,15) === false){
-    res.status(400).json({
+    return res.status(400).json({
       error: 'lastName should be atleast 3 characters long '
     })
   }
@@ -87,27 +87,29 @@ router.post('/signup',(req, res, next) => {
     email: req.body.email,
     password: hash
   }
+  // res.status(201).json({
+  //   message:{
+  //     email:"email"
+  //   }
+  // })
 
-  User.findAll({where:{email:request.email}})
+  
+  User.create(userDetails)
   .then(user=>{
-    if (user.length > 0){
-      res.status(400).json({
-        error:"email is already registered"
-      })
-    }else{
-      User.create(userDetails)
-      .then(user=>{
-       res.status(201).json({
-        message:{
-          "id":user.id,
-          "Name":user.firstName + user.lastName,
-          "email": user.email
-      }
-       });
-      })
+    return res.status(201).json({
+    message:{
+      "id":user.id,
+      "Name":user.firstName +" " +user.lastName,
+      "email": user.email
     }
+    });
   })
-  .catch(err => console.log(err))
+  .catch(err=>{
+    console.log("||>>>>>>>>>>>> "+ err)
+    res.status(400).json({
+      error:err
+    })
+  })
 });
 
 

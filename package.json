@@ -7,7 +7,8 @@
     "test": "jest",
     "start": "nodemon server.js",
     "test:watch": "jest --watch",
-    "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls"
+    "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
+    "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls"
   },
   "author": "",
   "license": "ISC",
